@@ -53,6 +53,9 @@ public class Show extends Video {
         double showRating = 0.0;
         for (Season season : this.seasons) {
             double seasonRating = 0.0;
+            if (season.getRatings().size() == 0) {
+                continue;
+            }
             for (Double rating : season.getRatings()) {
                 seasonRating += rating;
             }

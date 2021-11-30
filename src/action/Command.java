@@ -1,8 +1,10 @@
 package action;
 
 import common.Constants;
+import database.Database;
 import entertainment.Movie;
 import entertainment.Show;
+import entertainment.Video;
 import fileio.ActionInputData;
 import user.User;
 import utils.DatabaseSearch;
@@ -21,7 +23,7 @@ public class Command {
         String videoTitle = command.getTitle();
         if (user.getHistory().containsKey(videoTitle)) {
             if (user.getFavoriteVideos().contains(videoTitle)) {
-                return "error -> " + videoTitle + "is already in favourite list";
+                return "error -> " + videoTitle + " is already in favourite list";
             }
             user.getFavoriteVideos().add(videoTitle);
             return "success -> " + videoTitle + " was added as favourite";
@@ -46,6 +48,7 @@ public class Command {
         if (user == null) {
             return Constants.INVALID_USER;
         }
+
         String videoTitle = command.getTitle();
         int seasonNumber = command.getSeasonNumber();
         if (!user.videoWasSeen(videoTitle)) {
@@ -55,19 +58,26 @@ public class Command {
                 && user.getRatedVideos().get(videoTitle).contains(seasonNumber)) {
             return "error -> " + videoTitle + " has been already rated";
         }
+        if (!user.getRatedVideos().containsKey(videoTitle)) {
+            user.getRatedVideos().put(videoTitle, new ArrayList<Integer>());
+        }
         ArrayList<Integer> ratedSeasons = user.getRatedVideos().get(videoTitle);
+
         if (ratedSeasons.isEmpty()) {
             ratedSeasons.add(seasonNumber);
         } else if (seasonNumber != 0) {
             ratedSeasons.add(seasonNumber);
         }
-        if (seasonNumber != 0) {
+        String videoType = Database.getVideoType(videoTitle);
+        if (videoType.equals(Constants.MOVIES)) {
+
             final Movie ratedMovie = DatabaseSearch.searchMovie(videoTitle);
             if (ratedMovie == null) {
                 return "error -> " + videoTitle + " is not seen";
             }
             ratedMovie.getRatings().add(command.getGrade());
         } else {
+
             final Show ratedShow = DatabaseSearch.searchShow(videoTitle);
             if (ratedShow == null) {
                 return "error -> " + videoTitle + " is not seen";

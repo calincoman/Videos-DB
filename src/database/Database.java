@@ -1,5 +1,7 @@
 package database;
 
+import common.Constants;
+import fileio.ActionInputData;
 import fileio.Input;
 import user.User;
 import actor.Actor;
@@ -9,6 +11,7 @@ import entertainment.Video;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class Database {
     private static Database databaseInstance = null;
@@ -27,6 +30,42 @@ public final class Database {
             databaseInstance = new Database();
         }
         return databaseInstance;
+    }
+
+    public static String getVideoType(final String videoTitle) {
+        for (Movie movie : getDatabaseInstance().getMovies()) {
+            if (movie.getTitle().equals(videoTitle)) {
+                return Constants.MOVIES;
+            }
+        }
+        return Constants.SHOWS;
+    }
+
+    public static ArrayList<Video> filterVideos(final ActionInputData action) {
+        List<String> yearFilter = action.getFilters().get(Constants.YEAR_FILTER_INDEX);
+        List<String> genreFilter = action.getFilters().get(Constants.GENRE_FILTER_INDEX);
+
+        String year = (yearFilter.isEmpty()) ? null : yearFilter.get(0);
+
+        ArrayList<Video> videoList = Database.getDatabaseInstance().getVideos();
+        ArrayList<Video> filteredVideoList = new ArrayList<Video>();
+
+        for (Video video : videoList) {
+            boolean toBeAdded = true;
+            if (year != null && !year.equals(String.valueOf(video.getYear()))) {
+                toBeAdded = false;
+            }
+            for (String genre : genreFilter) {
+                if (genre != null && !video.getGenres().contains(genre)) {
+                    toBeAdded = false;
+                    break;
+                }
+            }
+            if (toBeAdded) {
+                filteredVideoList.add(video);
+            }
+        }
+        return filteredVideoList;
     }
 
     public void loadData(final Input input) {

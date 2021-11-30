@@ -1,5 +1,8 @@
 package actor;
 
+import database.Database;
+import entertainment.Movie;
+import entertainment.Show;
 import entertainment.Video;
 import fileio.ActorInputData;
 import utils.DatabaseSearch;
@@ -7,6 +10,8 @@ import utils.DatabaseSearch;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Actor {
     /**
@@ -36,13 +41,21 @@ public class Actor {
     public Double getRating() {
         double actorRating = 0.0;
         double ratingsNumber = 0.0;
+
         for (String videoTitle : filmography) {
-            Video video = DatabaseSearch.searchVideo(videoTitle);
-            if (video != null && video.getRating() != null) {
+            Movie movie = DatabaseSearch.searchMovie(videoTitle);
+            Show show = DatabaseSearch.searchShow(videoTitle);
+
+            if (movie != null && movie.getRating() != null) {
                 ++ratingsNumber;
-                actorRating += video.getRating();
+                actorRating += movie.getRating();
+            }
+            if (show != null && show.getRating() != null) {
+                ++ratingsNumber;
+                actorRating += show.getRating();
             }
         }
+
         if (ratingsNumber != 0) {
             return actorRating / ratingsNumber;
         }
@@ -71,5 +84,12 @@ public class Actor {
             awardsNumber += entry.getValue();
         }
         return awardsNumber;
+    }
+
+    public boolean hasKeyWord(String keyWord) {
+        Pattern pattern = Pattern.compile("[ ,!.'(-]" + keyWord + "[ ,!.')-]",
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(this.careerDescription);
+        return matcher.find();
     }
 }

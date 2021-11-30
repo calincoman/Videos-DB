@@ -7,6 +7,7 @@ import entertainment.Video;
 import fileio.*;
 import user.User;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class DatabaseLoader {
@@ -19,6 +20,14 @@ public class DatabaseLoader {
         databaseLoader.loadMovies(input);
         databaseLoader.loadShows(input);
         databaseLoader.loadVideos(input);
+    }
+
+    public static void unLoadData() {
+        Database.getDatabaseInstance().getActors().clear();
+        Database.getDatabaseInstance().getUsers().clear();
+        Database.getDatabaseInstance().getVideos().clear();
+        Database.getDatabaseInstance().getMovies().clear();
+        Database.getDatabaseInstance().getShows().clear();
     }
 
     public void loadUsers(final Input input) {

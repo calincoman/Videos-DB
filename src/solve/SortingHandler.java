@@ -10,24 +10,37 @@ public final class SortingHandler {
     private SortingHandler() {
     }
 
-    public static Map<String, Double> sortMap(final Map<String, Double> map,
-                                               final String sortOrder) {
+    public static ArrayList<Map.Entry<String, Double>> customSortEntries(final Map<String, Double> map,
+                                              final String sortOrder) {
 
         ArrayList<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
 
-        Map<String, Double> sortedMap = new HashMap<String, Double>();
+        entryList.sort(new Comparator<Map.Entry<String, Double>>() {
+            @Override
+            public int compare(Map.Entry<String, Double> entry1, Map.Entry<String, Double> entry2) {
+                Double val1 = entry1.getValue();
+                Double val2 = entry2.getValue();
 
-        MapComparator sortingComparator = new MapComparator();
-        if (sortOrder.equals(Constants.ASCENDING)) {
-            entryList.sort(sortingComparator);
-        } else {
-            entryList.sort(sortingComparator.reversed());
-        }
+                int compareValue = val1.compareTo(val2);
 
-        for (Map.Entry<String, Double> entry : entryList) {
-            sortedMap.put(entry.getKey(), entry.getValue());
-        }
+                if (compareValue == 0) {
+                    String key1 = entry1.getKey();
+                    String key2 = entry2.getKey();
 
-        return sortedMap;
+                    if (sortOrder.equals(Constants.DESCENDING)) {
+                        return key2.compareTo(key1);
+                    }
+
+                    return key1.compareTo(key2);
+                }
+
+                if (sortOrder.equals(Constants.DESCENDING)) {
+                    return val2.compareTo(val1);
+                }
+                return val1.compareTo(val2);
+            }
+        });
+
+        return entryList;
     }
 }

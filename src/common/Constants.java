@@ -82,6 +82,12 @@ public final class Constants {
     public static final String VIEW_COMMAND = "view";
     public static final String RATING_COMMAND = "rating";
     public static final String ASCENDING = "asc";
+    public static final String DESCENDING = "desc";
+    public static final String AVERAGE = "average";
+    public static final String RATING_QUERY = "ratings";
+    public static final String FAVORITE_QUERY = "favorite";
+    public static final String LONGEST_QUERY = "longest";
+    public static final String MOST_VIEWED_QUERY = "most_viewed";
 
     public static final int YEAR_FILTER_INDEX = 0;
     public static final int GENRE_FILTER_INDEX = 1;

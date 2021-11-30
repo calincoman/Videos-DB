@@ -75,6 +75,8 @@ public final class Main {
 
         //TODO add here the entry point to your implementation
         DatabaseLoader.loadData(input);
+        InputHandler.executeActions(input, fileWriter, arrayResult);
+        DatabaseLoader.unLoadData();
 
         fileWriter.closeJSON(arrayResult);
     }

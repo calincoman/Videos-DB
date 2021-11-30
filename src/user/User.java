@@ -44,6 +44,14 @@ public class User {
         this.ratedVideos = new HashMap<String, ArrayList<Integer>>();
     }
 
+    public int getNumberOfRatings() {
+        int numberOfRatings = 0;
+        for (Map.Entry<String, ArrayList<Integer>> rating : ratedVideos.entrySet()) {
+            numberOfRatings += rating.getValue().size();
+        }
+        return numberOfRatings;
+    }
+
     public String getUsername() {
         return username;
     }
