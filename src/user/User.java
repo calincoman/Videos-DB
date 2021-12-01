@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class defining a user
+ */
 public class User {
     /**
      * Username
@@ -44,6 +47,10 @@ public class User {
         this.ratedVideos = new HashMap<String, ArrayList<Integer>>();
     }
 
+    /**
+     * Calculates number of ratings given by the user
+     * @return number of ratings given by user
+     */
     public int getNumberOfRatings() {
         int numberOfRatings = 0;
         for (Map.Entry<String, ArrayList<Integer>> rating : ratedVideos.entrySet()) {
@@ -72,6 +79,11 @@ public class User {
         return ratedVideos;
     }
 
+    /**
+     * Checks if a video was seen by the user
+     * @param videoName video's title
+     * @return true if it was seen, false otherwise
+     */
     public boolean videoWasSeen(String videoName) {
         return history.containsKey(videoName);
     }
