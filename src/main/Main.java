@@ -3,7 +3,6 @@ package main;
 import checker.Checkstyle;
 import checker.Checker;
 import common.Constants;
-import database.Database;
 import database.DatabaseLoader;
 import fileio.Input;
 import fileio.InputLoader;
@@ -73,7 +72,10 @@ public final class Main {
         Writer fileWriter = new Writer(filePath2);
         JSONArray arrayResult = new JSONArray();
 
-        //TODO add here the entry point to your implementation
+        /**
+         * Load the data in the database, call the input handler to execute the actions and unload
+         * the data from the database
+         */
         DatabaseLoader.loadData(input);
         InputHandler.executeActions(input, fileWriter, arrayResult);
         DatabaseLoader.unLoadData();

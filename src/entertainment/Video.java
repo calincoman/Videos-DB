@@ -4,11 +4,13 @@ import database.Database;
 import fileio.ShowInput;
 import user.User;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Abstract class that defines a video
+ */
 public abstract class Video {
     /**
      * Video's title
@@ -48,6 +50,10 @@ public abstract class Video {
 
     public abstract Double getRatingNotNullable();
 
+    /**
+     * Calculate number of the video's appearances in the favorite lists of the users
+     * @return number of appearances in the favorite lists of the users
+     */
     public int getMarkedAsFavoriteNumber() {
         int favoriteCount = 0;
         for (User user : Database.getDatabaseInstance().getUsers()) {
@@ -58,6 +64,10 @@ public abstract class Video {
         return favoriteCount;
     }
 
+    /**
+     * Calculates the number of times the video was viewed
+     * @return number of times the video was viewed
+     */
     public int getViewNumber() {
         int viewNumber = 0;
         for (User user : Database.getDatabaseInstance().getUsers()) {
@@ -68,6 +78,11 @@ public abstract class Video {
         return viewNumber;
     }
 
+    /**
+     * Creates a map with entry (genre title, genre popularity)
+     * Popularity of a genre is the number of views of the videos which have that genre
+     * @return map containing (String, Double) entries
+     */
     public static Map<String, Double> getGenrePopularity() {
         Map<String, Double> genrePopularity = new HashMap<String, Double>();
 

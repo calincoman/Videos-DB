@@ -35,7 +35,11 @@ public class Actor {
         this.awards = new HashMap<ActorsAwards, Integer>(actorInput.getAwards());
     }
 
-    public Double getRating() {
+    /**
+     * Calculate rating of the actor (arithmetic mean of all the videos he starred in)
+     * @return actor's rating, null if he has no rating
+     */
+    public final Double getRating() {
         double actorRating = 0.0;
         double ratingsNumber = 0.0;
 
@@ -54,23 +58,27 @@ public class Actor {
         return null;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public String getCareerDescription() {
+    public final String getCareerDescription() {
         return careerDescription;
     }
 
-    public ArrayList<String> getFilmography() {
+    public final ArrayList<String> getFilmography() {
         return filmography;
     }
 
-    public Map<ActorsAwards, Integer> getAwards() {
+    public final Map<ActorsAwards, Integer> getAwards() {
         return awards;
     }
 
-    public int getAwardsNumber() {
+    /**
+     * Calculate number of awards of an actor
+     * @return actor's number of awards
+     */
+    public final int getAwardsNumber() {
         int awardsNumber = 0;
         for (Map.Entry<ActorsAwards, Integer> entry : awards.entrySet()) {
             awardsNumber += entry.getValue();
@@ -78,7 +86,12 @@ public class Actor {
         return awardsNumber;
     }
 
-    public boolean hasKeyWord(String keyWord) {
+    /**
+     * Determines if an actor's description contains a keyword
+     * @param keyWord keyword to be searched in actor's description
+     * @return true if the actor's description has the keyword, false otherwise
+     */
+    public final boolean hasKeyWord(final String keyWord) {
         Pattern pattern = Pattern.compile("[ ,!.'(-]" + keyWord + "[ ,!.')-]",
                 Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(this.careerDescription);

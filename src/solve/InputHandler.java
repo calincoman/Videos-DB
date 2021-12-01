@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to handle the input and output
+ */
 public class InputHandler {
     public InputHandler() {
     }
@@ -28,6 +31,10 @@ public class InputHandler {
         List<ActionInputData> actions = input.getCommands();
         ActionHandler actionHandler = new ActionHandler();
 
+        /**
+         * Iterate through the actions and execute them one by one, then write the result message to the
+         * arrayResult
+         */
         for (ActionInputData actionInputData : actions) {
             String resultMessage = actionHandler.executeAction(actionInputData);
             arrayResult.add(fileWriter.writeFile(actionInputData.getActionId(), "", resultMessage));

@@ -3,8 +3,11 @@ package entertainment;
 import fileio.MovieInputData;
 
 import java.util.ArrayList;
-import java.util.Map;
 
+/**
+ * Class that defines a movie
+ * Inherits Video abstract class
+ */
 public class Movie extends Video {
     /**
      * Duration in minutes of a movie
@@ -13,8 +16,8 @@ public class Movie extends Video {
 
     private final ArrayList<Double> ratings;
 
-    public Movie(String title, int year, ArrayList<String> cast, ArrayList<String> genres,
-                 int duration) {
+    public Movie(final String title, final int year, final ArrayList<String> cast,
+                 final ArrayList<String> genres, final int duration) {
         super(title, year, cast, genres);
         this.duration = duration;
         this.ratings = new ArrayList<Double>();
@@ -26,8 +29,12 @@ public class Movie extends Video {
         this.ratings = new ArrayList<Double>();
     }
 
+    /**
+     * Calculates rating of a movie (is nullable)
+     * @return the rating if it was rated at least once, null otherwise
+     */
     @Override
-    public Double getRating() {
+    public final Double getRating() {
         double movieRating = 0.0;
         if (ratings.isEmpty()) {
             return null;
@@ -39,8 +46,12 @@ public class Movie extends Video {
         return movieRating;
     }
 
+    /**
+     * Calculates rating of a movie (is not nullable)
+     * @return the rating if it was rated at least once, 0 otherwise
+     */
     @Override
-    public Double getRatingNotNullable() {
+    public final Double getRatingNotNullable() {
         double movieRating = 0.0;
         if (ratings.isEmpty()) {
             return 0.0;
@@ -52,7 +63,7 @@ public class Movie extends Video {
         return movieRating;
     }
 
-    public int getDuration() {
+    public final int getDuration() {
         return duration;
     }
 

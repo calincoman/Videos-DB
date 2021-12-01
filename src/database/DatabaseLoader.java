@@ -4,14 +4,24 @@ import actor.Actor;
 import entertainment.Movie;
 import entertainment.Show;
 import entertainment.Video;
-import fileio.*;
+import fileio.ActorInputData;
+import fileio.Input;
+import fileio.MovieInputData;
+import fileio.SerialInputData;
+import fileio.UserInputData;
 import user.User;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
+/**
+ * Class used to load data in the database
+ */
 public class DatabaseLoader {
 
+    /**
+     * Loads data in the database by calling the load functions
+     * @param input input data to be loaded
+     */
     public static void loadData(final Input input) {
         DatabaseLoader databaseLoader = new DatabaseLoader();
 
@@ -22,6 +32,9 @@ public class DatabaseLoader {
         databaseLoader.loadVideos(input);
     }
 
+    /**
+     * Removes data from the database
+     */
     public static void unLoadData() {
         Database.getDatabaseInstance().getActors().clear();
         Database.getDatabaseInstance().getUsers().clear();
@@ -30,7 +43,11 @@ public class DatabaseLoader {
         Database.getDatabaseInstance().getShows().clear();
     }
 
-    public void loadUsers(final Input input) {
+    /**
+     * Makes a deep copy of the users from the input and adds the copies in the database
+     * @param input input data
+     */
+    public final void loadUsers(final Input input) {
         ArrayList<User> users = new ArrayList<User>();
         for (UserInputData userInput : input.getUsers()) {
             users.add(new User(userInput));
@@ -38,7 +55,11 @@ public class DatabaseLoader {
         Database.getDatabaseInstance().addUsers(users);
     }
 
-    public void loadActors(final Input input) {
+    /**
+     * Makes a deep copy of the actors from the input and adds the copies in the database
+     * @param input input data
+     */
+    public final void loadActors(final Input input) {
         ArrayList<Actor> actors = new ArrayList<Actor>();
         for (ActorInputData actorInput : input.getActors()) {
             actors.add(new Actor(actorInput));
@@ -46,14 +67,23 @@ public class DatabaseLoader {
         Database.getDatabaseInstance().addActors(actors);
     }
 
-    public void loadMovies(final Input input) {
+    /**
+     * Makes a deep copy of the movies from the input and adds the copies in the database
+     * @param input input data
+     */
+    public final void loadMovies(final Input input) {
         ArrayList<Movie> movies = new ArrayList<Movie>();
         for (MovieInputData movieInput : input.getMovies()) {
             movies.add(new Movie(movieInput));
         }
         Database.getDatabaseInstance().addMovies(movies);
     }
-    public void loadShows(final Input input) {
+
+    /**
+     * Makes a deep copy of the shows from the input and adds the copies in the database
+     * @param input input data
+     */
+    public final void loadShows(final Input input) {
         ArrayList<Show> shows = new ArrayList<Show>();
         for (SerialInputData showInput : input.getSerials()) {
             shows.add(new Show(showInput));
@@ -61,7 +91,12 @@ public class DatabaseLoader {
         Database.getDatabaseInstance().addShows(shows);
     }
 
-    public void loadVideos(final Input input) {
+    /**
+     * Adds the deep copies of movies and shows from the input data to a video list
+     * The video list will have same references as the objects from the movie and show list
+     * @param input input data
+     */
+    public final void loadVideos(final Input input) {
 
         ArrayList<Movie> movies = Database.getDatabaseInstance().getMovies();
         ArrayList<Show> shows = Database.getDatabaseInstance().getShows();

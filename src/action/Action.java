@@ -1,7 +1,5 @@
 package action;
 
-import fileio.ActionInputData;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,9 +57,10 @@ public abstract class Action {
      */
     private final List<List<String>> filters = new ArrayList<>();
 
-    protected Action(int actionId, String actionType, String type, String username,
-                     String objectType, String sortType, String criteria, String title,
-                     String genre, int number, double grade, int seasonNumber) {
+    protected Action(final int actionId, final String actionType, final String type,
+                     final String username, final String objectType, final String sortType,
+                     final String criteria, final String title, final String genre,
+                     final int number, final double grade, final int seasonNumber) {
         this.actionId = actionId;
         this.actionType = actionType;
         this.type = type;
@@ -76,55 +75,55 @@ public abstract class Action {
         this.seasonNumber = seasonNumber;
     }
 
-    public int getActionId() {
+    public final int getActionId() {
         return actionId;
     }
 
-    public String getActionType() {
+    public final String getActionType() {
         return actionType;
     }
 
-    public String getType() {
+    public final String getType() {
         return type;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public String getObjectType() {
+    public final String getObjectType() {
         return objectType;
     }
 
-    public String getSortType() {
+    public final String getSortType() {
         return sortType;
     }
 
-    public String getCriteria() {
+    public final String getCriteria() {
         return criteria;
     }
 
-    public String getTitle() {
+    public final String getTitle() {
         return title;
     }
 
-    public String getGenre() {
+    public final String getGenre() {
         return genre;
     }
 
-    public int getNumber() {
+    public final int getNumber() {
         return number;
     }
 
-    public double getGrade() {
+    public final double getGrade() {
         return grade;
     }
 
-    public int getSeasonNumber() {
+    public final int getSeasonNumber() {
         return seasonNumber;
     }
 
-    public List<List<String>> getFilters() {
+    public final List<List<String>> getFilters() {
         return filters;
     }
 }

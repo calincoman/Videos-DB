@@ -9,13 +9,18 @@ import entertainment.Movie;
 import entertainment.Show;
 import entertainment.Video;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Singleton class used to store the program's data
+ */
 public final class Database {
     private static Database databaseInstance = null;
 
+    /**
+     * Lists with all data required
+     */
     private final ArrayList<User> users = new ArrayList<User>();
     private final ArrayList<Actor> actors = new ArrayList<Actor>();
     private final ArrayList<Video> videos = new ArrayList<Video>();
@@ -32,6 +37,11 @@ public final class Database {
         return databaseInstance;
     }
 
+    /**
+     * Finds the type of video
+     * @param videoTitle the video's title
+     * @return "movies" if the video is a movie, "shows" if it is a show
+     */
     public static String getVideoType(final String videoTitle) {
         for (Movie movie : getDatabaseInstance().getMovies()) {
             if (movie.getTitle().equals(videoTitle)) {
@@ -41,7 +51,13 @@ public final class Database {
         return Constants.SHOWS;
     }
 
+    /**
+     * Filters the videos from the database by year and genre
+     * @param action contains filter input data
+     * @return a list with the videos filtered by year and genre
+     */
     public static ArrayList<Video> filterVideos(final ActionInputData action) {
+        // Get filters
         List<String> yearFilter = action.getFilters().get(Constants.YEAR_FILTER_INDEX);
         List<String> genreFilter = action.getFilters().get(Constants.GENRE_FILTER_INDEX);
 
@@ -68,28 +84,52 @@ public final class Database {
         return filteredVideoList;
     }
 
+    /**
+     * Loads input data in the database
+     * @param input input data
+     */
     public void loadData(final Input input) {
         DatabaseLoader.loadData(input);
     }
 
-    public void addUsers(ArrayList<User> users) {
-        this.users.addAll(users);
+    /**
+     * Adds a users list to the database
+     * @param otherUsers users list to be added in the database
+     */
+    public void addUsers(final ArrayList<User> otherUsers) {
+        this.users.addAll(otherUsers);
     }
 
-    public void addActors(ArrayList<Actor> actors) {
-        this.actors.addAll(actors);
+    /**
+     * Adds an actors list to the database
+     * @param otherActors actors list to be added in the database
+     */
+    public void addActors(final ArrayList<Actor> otherActors) {
+        this.actors.addAll(otherActors);
     }
 
-    public void addVideos(ArrayList<Video> videos) {
-        this.videos.addAll(videos);
+    /**
+     * Adds a videos list to the database
+     * @param otherVideos videos list to be added in the database
+     */
+    public void addVideos(final ArrayList<Video> otherVideos) {
+        this.videos.addAll(otherVideos);
     }
 
-    public void addMovies(ArrayList<Movie> movies) {
-        this.movies.addAll(movies);
+    /**
+     * Adds a movies list to the database
+     * @param otherMovies movies list to be added in the database
+     */
+    public void addMovies(final ArrayList<Movie> otherMovies) {
+        this.movies.addAll(otherMovies);
     }
 
-    public void addShows(ArrayList<Show> shows) {
-        this.shows.addAll(shows);
+    /**
+     * Adds a shows list to the database
+     * @param otherShows shows list to be added in the database
+     */
+    public void addShows(final ArrayList<Show> otherShows) {
+        this.shows.addAll(otherShows);
     }
 
     public ArrayList<User> getUsers() {

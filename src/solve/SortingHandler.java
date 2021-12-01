@@ -5,11 +5,20 @@ import fileio.ActionInputData;
 
 import java.util.*;
 
+/**
+ * Class used for sorting
+ */
 public final class SortingHandler {
 
     private SortingHandler() {
     }
 
+    /**
+     * Sorts a (String, Double) Map first by value, then by key in the specified order
+     * @param map map to be sorted
+     * @param sortOrder sorting order (ascending / descending)
+     * @return array list containing the sorted entries of the map
+     */
     public static ArrayList<Map.Entry<String, Double>> customSortEntries(final Map<String, Double> map,
                                               final String sortOrder) {
 

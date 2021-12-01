@@ -10,17 +10,27 @@ import database.DatabaseSearch;
 
 import java.util.ArrayList;
 
-public class Command {
-    public Command() {
+/**
+ * Utility class used for the command operations
+ */
+public final class Command {
+    private Command() {
     }
 
+    /**
+     * Adds a video to the user's favorite list
+     * @param command information about the command to be executed
+     * @return string containing the command's result message
+     */
     public static String favoriteCommand(final ActionInputData command) {
+        // Get the user from the database
         User user = DatabaseSearch.searchUser(command.getUsername());
         if (user == null) {
             return Constants.INVALID_USER;
         }
         String videoTitle = command.getTitle();
         if (user.getHistory().containsKey(videoTitle)) {
+            // Check if video is not already in the favorite list
             if (user.getFavoriteVideos().contains(videoTitle)) {
                 return "error -> " + videoTitle + " is already in favourite list";
             }
@@ -30,7 +40,13 @@ public class Command {
         return "error -> " + videoTitle + " is not seen";
     }
 
+    /**
+     * Adds a video to the user's view history
+     * @param command information about the command to be executed
+     * @return string containing the command's result message
+     */
     public static String viewCommand(final ActionInputData command) {
+        // Get the user from the database
         User user = DatabaseSearch.searchUser(command.getUsername());
         if (user == null) {
             return Constants.INVALID_USER;
@@ -42,7 +58,13 @@ public class Command {
                 + user.getHistory().get(videoTitle);
     }
 
+    /**
+     * Adds a rating to a video (movie / season of a show)
+     * @param command information about the command to be executed
+     * @return string containing the command's result message
+     */
     public static String ratingCommand(final ActionInputData command) {
+        // Get the user from the database
         User user = DatabaseSearch.searchUser(command.getUsername());
         if (user == null) {
             return Constants.INVALID_USER;
@@ -50,6 +72,7 @@ public class Command {
 
         String videoTitle = command.getTitle();
         int seasonNumber = command.getSeasonNumber();
+        // Check if the video was not seen or was already rated
         if (!user.videoWasSeen(videoTitle)) {
             return "error -> " + videoTitle + " is not seen";
         }
@@ -57,11 +80,13 @@ public class Command {
                 && user.getRatedVideos().get(videoTitle).contains(seasonNumber)) {
             return "error -> " + videoTitle + " has been already rated";
         }
+        // Add an entry to the user's rated videos map
         if (!user.getRatedVideos().containsKey(videoTitle)) {
             user.getRatedVideos().put(videoTitle, new ArrayList<Integer>());
         }
         ArrayList<Integer> ratedSeasons = user.getRatedVideos().get(videoTitle);
 
+        // For a movie the default season number is 0
         if (ratedSeasons.isEmpty()) {
             ratedSeasons.add(seasonNumber);
         } else if (seasonNumber != 0) {
@@ -69,11 +94,11 @@ public class Command {
         }
         String videoType = Database.getVideoType(videoTitle);
         if (videoType.equals(Constants.MOVIES)) {
-
             final Movie ratedMovie = DatabaseSearch.searchMovie(videoTitle);
             if (ratedMovie == null) {
                 return "error -> " + videoTitle + " is not seen";
             }
+            // Add rating to the movie's ratings list
             ratedMovie.getRatings().add(command.getGrade());
         } else {
 
@@ -81,6 +106,7 @@ public class Command {
             if (ratedShow == null) {
                 return "error -> " + videoTitle + " is not seen";
             }
+            // Add rating to the season's rating list
             ratedShow.getSeasons().get(seasonNumber - 1).getRatings().add(command.getGrade());
         }
         return "success -> " + videoTitle + " was rated with " + command.getGrade()

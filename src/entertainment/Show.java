@@ -1,11 +1,13 @@
 package entertainment;
 
-import database.Database;
 import fileio.SerialInputData;
-import fileio.ShowInput;
 
 import java.util.ArrayList;
 
+/**
+ * Class that defines a show
+ * Inherits Video abstract class
+ */
 public class Show extends Video {
     /**
      * Number of seasons
@@ -16,10 +18,9 @@ public class Show extends Video {
      */
     private final ArrayList<Season> seasons;
 
-    private Double showRating;
-
-    public Show(String title, int year, ArrayList<String> cast, ArrayList<String> genres,
-                int numberOfSeasons, ArrayList<Season> seasons) {
+    public Show(final String title, final int year, final ArrayList<String> cast,
+                final ArrayList<String> genres, final int numberOfSeasons,
+                final ArrayList<Season> seasons) {
         super(title, year, cast, genres);
         this.numberOfSeasons = numberOfSeasons;
         this.seasons = seasons;
@@ -31,16 +32,16 @@ public class Show extends Video {
         this.seasons = new ArrayList<Season>(serialInputData.getSeasons());
     }
 
-    public int getNumberOfSeasons() {
+    public final int getNumberOfSeasons() {
         return numberOfSeasons;
     }
 
-    public ArrayList<Season> getSeasons() {
+    public final ArrayList<Season> getSeasons() {
         return seasons;
     }
 
     @Override
-    public int getDuration() {
+    public final int getDuration() {
         int showDuration = 0;
         for (Season season : this.seasons) {
             showDuration += season.getDuration();
@@ -48,8 +49,12 @@ public class Show extends Video {
         return showDuration;
     }
 
+    /**
+     * Calculates rating of a show (is nullable)
+     * @return the rating if it was rated at least once, null otherwise
+     */
     @Override
-    public Double getRating() {
+    public final Double getRating() {
         double showRating = 0.0;
         for (Season season : this.seasons) {
             double seasonRating = 0.0;
@@ -68,8 +73,12 @@ public class Show extends Video {
         return null;
     }
 
+    /**
+     * Calculates rating of a show (is not nullable)
+     * @return the rating if it was rated at least once, 0 otherwise
+     */
     @Override
-    public Double getRatingNotNullable() {
+    public final Double getRatingNotNullable() {
         double showRating = 0.0;
         for (Season season : this.seasons) {
             double seasonRating = 0.0;
