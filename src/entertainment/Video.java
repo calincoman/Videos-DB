@@ -44,10 +44,22 @@ public abstract class Video {
         this.genres = new ArrayList<String>(showInput.getGenres());
     }
 
+    /**
+     * Calculates duration of the video
+     * @return duration of the video
+     */
     public abstract int getDuration();
 
+    /**
+     * Calculates rating of the video
+     * @return the rating of the video if the video was rated at least once, null otherwise
+     */
     public abstract Double getRating();
 
+    /**
+     * Calculates rating of the video
+     * @return the rating of the video if the video was rated at least once, 0 otherwise
+     */
     public abstract Double getRatingNotNullable();
 
     /**

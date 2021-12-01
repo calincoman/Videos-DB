@@ -51,7 +51,7 @@ public class User {
      * Calculates number of ratings given by the user
      * @return number of ratings given by user
      */
-    public int getNumberOfRatings() {
+    public final int getNumberOfRatings() {
         int numberOfRatings = 0;
         for (Map.Entry<String, ArrayList<Integer>> rating : ratedVideos.entrySet()) {
             numberOfRatings += rating.getValue().size();
@@ -59,23 +59,23 @@ public class User {
         return numberOfRatings;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public String getSubscriptionType() {
+    public final String getSubscriptionType() {
         return subscriptionType;
     }
 
-    public Map<String, Integer> getHistory() {
+    public final Map<String, Integer> getHistory() {
         return history;
     }
 
-    public ArrayList<String> getFavoriteVideos() {
+    public final ArrayList<String> getFavoriteVideos() {
         return favoriteVideos;
     }
 
-    public Map<String, ArrayList<Integer>> getRatedVideos() {
+    public final Map<String, ArrayList<Integer>> getRatedVideos() {
         return ratedVideos;
     }
 
@@ -84,7 +84,7 @@ public class User {
      * @param videoName video's title
      * @return true if it was seen, false otherwise
      */
-    public boolean videoWasSeen(String videoName) {
+    public boolean videoWasSeen(final String videoName) {
         return history.containsKey(videoName);
     }
 }

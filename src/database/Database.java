@@ -30,6 +30,10 @@ public final class Database {
     private Database() {
     }
 
+    /**
+     * Gets the database instance. If it doesn't exist, it creates and returns it.
+     * @return the database instance
+     */
     public static Database getDatabaseInstance() {
         if (databaseInstance == null) {
             databaseInstance = new Database();

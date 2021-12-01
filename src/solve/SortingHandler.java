@@ -1,9 +1,11 @@
 package solve;
 
 import common.Constants;
-import fileio.ActionInputData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Map;
+
 
 /**
  * Class used for sorting
@@ -19,8 +21,8 @@ public final class SortingHandler {
      * @param sortOrder sorting order (ascending / descending)
      * @return array list containing the sorted entries of the map
      */
-    public static ArrayList<Map.Entry<String, Double>> customSortEntries(final Map<String, Double> map,
-                                              final String sortOrder) {
+    public static ArrayList<Map.Entry<String, Double>> customSortEntries(
+            final Map<String, Double> map, final String sortOrder) {
 
         ArrayList<Map.Entry<String, Double>> entryList = new ArrayList<>(map.entrySet());
 
