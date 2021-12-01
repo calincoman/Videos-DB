@@ -6,15 +6,9 @@ import database.Database;
 import entertainment.Video;
 import fileio.ActionInputData;
 import solve.SortingHandler;
-import utils.DatabaseSearch;
 import utils.Utils;
 
-import javax.xml.crypto.Data;
-import java.awt.dnd.DropTargetAdapter;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Query {
 
@@ -28,6 +22,7 @@ public class Query {
                 actorRatingMap.put(actor.getName(), actorRating);
             }
         }
+
         return getQueryMessage(query, actorRatingMap);
     }
 
@@ -51,6 +46,7 @@ public class Query {
     public static String actorFilterQuery(final ActionInputData query) {
         List<String> keyWords = query.getFilters().get(Constants.WORDS_FILTER_INDEX);
         ArrayList<String> actorFilteredList = new ArrayList<String>();
+
         for (Actor actor : Database.getDatabaseInstance().getActors()) {
             boolean hasAllKeyWords = true;
             for (String keyWord : keyWords) {
@@ -83,7 +79,6 @@ public class Query {
                 videoRatingMap.put(video.getTitle(), videoRating);
             }
         });
-
         return getQueryMessage(query, videoRatingMap);
     }
 
@@ -157,7 +152,6 @@ public class Query {
             if (currentCount > itemCount) {
                 break;
             }
-
             queryMessage.add(entry.getKey());
             ++currentCount;
         }

@@ -4,10 +4,9 @@ import common.Constants;
 import database.Database;
 import entertainment.Movie;
 import entertainment.Show;
-import entertainment.Video;
 import fileio.ActionInputData;
 import user.User;
-import utils.DatabaseSearch;
+import database.DatabaseSearch;
 
 import java.util.ArrayList;
 

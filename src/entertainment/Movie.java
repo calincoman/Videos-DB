@@ -39,6 +39,19 @@ public class Movie extends Video {
         return movieRating;
     }
 
+    @Override
+    public Double getRatingNotNullable() {
+        double movieRating = 0.0;
+        if (ratings.isEmpty()) {
+            return 0.0;
+        }
+        for (Double rating : ratings) {
+            movieRating += rating;
+        }
+        movieRating /= ratings.size();
+        return movieRating;
+    }
+
     public int getDuration() {
         return duration;
     }

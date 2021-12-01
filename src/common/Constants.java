@@ -78,16 +78,27 @@ public final class Constants {
     public static final String INVALID_USER = "error -> invalid user";
     public static final String INVALID_COMMAND = "error -> invalid command";
     public static final String INVALID_QUERY = "error -> invalid query";
+    public static final String INVALID_RECOMMENDATION = "error -> invalid recommendation";
+    public static final String WRONG_ACTION = "error -> wrong action";
+
     public static final String FAVORITE_COMMAND = "favorite";
     public static final String VIEW_COMMAND = "view";
     public static final String RATING_COMMAND = "rating";
     public static final String ASCENDING = "asc";
     public static final String DESCENDING = "desc";
     public static final String AVERAGE = "average";
+
     public static final String RATING_QUERY = "ratings";
     public static final String FAVORITE_QUERY = "favorite";
     public static final String LONGEST_QUERY = "longest";
     public static final String MOST_VIEWED_QUERY = "most_viewed";
+
+    public static final String STANDARD_RECOMMENDATION = "standard";
+    public static final String BEST_UNSEEN_RECOMMENDATION = "best_unseen";
+    public static final String POPULAR_RECOMMENDATION = "popular";
+    public static final String FAVORITE_RECOMMENDATION = "favorite";
+    public static final String SEARCH_RECOMMENDATION = "search";
+    public static final String PREMIUM_SUBSCRIPTION = "PREMIUM";
 
     public static final int YEAR_FILTER_INDEX = 0;
     public static final int GENRE_FILTER_INDEX = 1;

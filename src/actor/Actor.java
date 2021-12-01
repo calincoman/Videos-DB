@@ -1,11 +1,8 @@
 package actor;
 
-import database.Database;
-import entertainment.Movie;
-import entertainment.Show;
 import entertainment.Video;
 import fileio.ActorInputData;
-import utils.DatabaseSearch;
+import database.DatabaseSearch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,16 +40,11 @@ public class Actor {
         double ratingsNumber = 0.0;
 
         for (String videoTitle : filmography) {
-            Movie movie = DatabaseSearch.searchMovie(videoTitle);
-            Show show = DatabaseSearch.searchShow(videoTitle);
 
-            if (movie != null && movie.getRating() != null) {
+            Video video = DatabaseSearch.searchVideo(videoTitle);
+            if (video != null && video.getRating() != null) {
                 ++ratingsNumber;
-                actorRating += movie.getRating();
-            }
-            if (show != null && show.getRating() != null) {
-                ++ratingsNumber;
-                actorRating += show.getRating();
+                actorRating += video.getRating();
             }
         }
 

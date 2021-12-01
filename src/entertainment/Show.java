@@ -67,4 +67,21 @@ public class Show extends Video {
         }
         return null;
     }
+
+    @Override
+    public Double getRatingNotNullable() {
+        double showRating = 0.0;
+        for (Season season : this.seasons) {
+            double seasonRating = 0.0;
+            if (season.getRatings().size() == 0) {
+                continue;
+            }
+            for (Double rating : season.getRatings()) {
+                seasonRating += rating;
+            }
+            showRating += seasonRating / season.getRatings().size();
+        }
+        showRating /= numberOfSeasons;
+        return showRating;
+    }
 }

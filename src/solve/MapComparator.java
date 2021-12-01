@@ -17,6 +17,7 @@ public final class MapComparator implements Comparator<Map.Entry<String, Double>
         if (compareValues == 0) {
             String key1 = entry1.getKey();
             String key2 = entry2.getKey();
+
             return key1.compareTo(key2);
         }
 

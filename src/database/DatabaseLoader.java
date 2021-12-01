@@ -62,15 +62,9 @@ public class DatabaseLoader {
     }
 
     public void loadVideos(final Input input) {
-        ArrayList<Movie> movies = new ArrayList<Movie>();
-        ArrayList<Show> shows = new ArrayList<Show>();
 
-        for (MovieInputData movieInput : input.getMovies()) {
-            movies.add(new Movie(movieInput));
-        }
-        for (SerialInputData showInput : input.getSerials()) {
-            shows.add(new Show(showInput));
-        }
+        ArrayList<Movie> movies = Database.getDatabaseInstance().getMovies();
+        ArrayList<Show> shows = Database.getDatabaseInstance().getShows();
 
         ArrayList<Video> videos = new ArrayList<Video>();
         videos.addAll(movies);

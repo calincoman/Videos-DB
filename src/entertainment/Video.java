@@ -6,6 +6,8 @@ import user.User;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Video {
     /**
@@ -44,6 +46,8 @@ public abstract class Video {
 
     public abstract Double getRating();
 
+    public abstract Double getRatingNotNullable();
+
     public int getMarkedAsFavoriteNumber() {
         int favoriteCount = 0;
         for (User user : Database.getDatabaseInstance().getUsers()) {
@@ -62,6 +66,18 @@ public abstract class Video {
             }
         }
         return viewNumber;
+    }
+
+    public static Map<String, Double> getGenrePopularity() {
+        Map<String, Double> genrePopularity = new HashMap<String, Double>();
+
+        for (Video video : Database.getDatabaseInstance().getVideos()) {
+            int viewNumber = video.getViewNumber();
+            for (String genre : video.getGenres()) {
+                genrePopularity.put(genre, genrePopularity.getOrDefault(genre, 0.0) + viewNumber);
+            }
+        }
+        return genrePopularity;
     }
 
     public final String getTitle() {

@@ -3,6 +3,7 @@ package solve;
 import action.Action;
 import action.Command;
 import action.Query;
+import action.Recommendation;
 import common.Constants;
 import fileio.ActionInputData;
 
@@ -10,11 +11,12 @@ public class ActionHandler {
 
     public String executeAction(ActionInputData action) {
         final String actionType = action.getActionType();
+
         return switch(actionType) {
             case Constants.COMMAND -> executeCommand(action);
             case Constants.QUERY -> executeQuery(action);
-            case Constants.RECOMMENDATION -> "";
-            default -> "error -> wrong action";
+            case Constants.RECOMMENDATION -> executeRecommendation(action);
+            default -> Constants.WRONG_ACTION;
         };
     }
 
@@ -51,6 +53,18 @@ public class ActionHandler {
                 default -> Constants.INVALID_QUERY;
             };
             default -> Constants.INVALID_QUERY;
+        };
+    }
+
+    private String executeRecommendation(final ActionInputData recommendation) {
+
+        return switch(recommendation.getType()) {
+            case Constants.STANDARD_RECOMMENDATION -> Recommendation.standardRecommendation(recommendation);
+            case Constants.BEST_UNSEEN_RECOMMENDATION -> Recommendation.bestUnseenRecommendation(recommendation);
+            case Constants.POPULAR_RECOMMENDATION -> Recommendation.popularRecommendation(recommendation);
+            case Constants.FAVORITE_RECOMMENDATION -> Recommendation.favoriteRecommendation(recommendation);
+            case Constants.SEARCH_RECOMMENDATION -> Recommendation.searchRecommendation(recommendation);
+            default -> Constants.INVALID_RECOMMENDATION;
         };
     }
 

@@ -33,13 +33,4 @@ public class InputHandler {
             arrayResult.add(fileWriter.writeFile(actionInputData.getActionId(), "", resultMessage));
         }
     }
-
-    public static void printData() {
-        ArrayList<Actor> actors = Database.getDatabaseInstance().getActors();
-        ArrayList<User> users = Database.getDatabaseInstance().getUsers();
-        ArrayList<Video> videos = Database.getDatabaseInstance().getVideos();
-        ArrayList<Movie> movies = Database.getDatabaseInstance().getMovies();
-        ArrayList<Show> shows = Database.getDatabaseInstance().getShows();
-    }
-
 }
