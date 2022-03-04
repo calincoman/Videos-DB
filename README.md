@@ -1,4 +1,4 @@
-# Videos DB - Coman Calin-Alexandru 321CA
+# Videos DB
 
 ## Package Structure and Class Description
 
